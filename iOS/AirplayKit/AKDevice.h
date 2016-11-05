@@ -14,28 +14,29 @@
 @protocol AKDeviceDelegate <NSObject>
 
 @optional
-
-- (void) device:(AKDevice *)device didSendBackMessage:(NSString *)message;
+- (void)device:(AKDevice *)device didSendBackMessage:(NSString *)message;
+- (void)connectRemoteDeviceSuccess;
+- (void)connectRemoteDeviceFailed;
 
 @end
 
 
-@interface AKDevice : NSObject <AsyncSocketDelegate>
-{
+@interface AKDevice : NSObject <AsyncSocketDelegate> {
 @private
-	NSString *hostname;
-	UInt16 port;
-	id <AKDeviceDelegate> delegate;
-	BOOL connected;
-	AsyncSocket *socket;
-	BOOL okToSend;
-	NSString *queuedMessage;
+    NSString *hostname;
+    UInt16 port;
+    __unsafe_unretained id <AKDeviceDelegate> delegate;
+    BOOL connected;
+    AsyncSocket *socket;
+    BOOL okToSend;
+    NSString *queuedMessage;
 }
 
 @property (nonatomic, readonly) NSString *displayName;
 @property (nonatomic, retain) NSString *hostname;
+@property (nonatomic, strong) NSString *name;
 @property (nonatomic) UInt16 port;
-@property (nonatomic, assign) id <AKDeviceDelegate> delegate;
+@property (nonatomic, weak) id <AKDeviceDelegate> delegate;
 @property (nonatomic) BOOL connected; // Set to YES when the device is connected.
 @property (nonatomic, retain) AsyncSocket *socket; // The socket used to transmit data. Only use for completely custom actions.
 @property (nonatomic) CGFloat imageQuality; // JPEG image quality for sending images. Defaults to 0.8;
