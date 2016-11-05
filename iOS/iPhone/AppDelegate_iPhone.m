@@ -25,6 +25,8 @@
     
     [self.window makeKeyAndVisible];
     
+    self.window.rootViewController = [UIViewController new];
+    
     return YES;
 }
 
@@ -41,7 +43,7 @@
 
 - (void) sendRemoteVideo
 {
-	if(manager.connectedDevice) [manager.connectedDevice sendContentURL:@"http://roozy.net/deadman.mp4"];
+	if(manager.connectedDevice) [manager.connectedDevice sendContentURL:@"http://vssauth.waqu.com/1hb69wcs2ln1144e/normal.mp4?auth_key=1478346314-0-0-361265601a6f5581687ea8a4eadc502f"];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
